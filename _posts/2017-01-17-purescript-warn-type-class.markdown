@@ -5,7 +5,7 @@ date:   2017-01-17 21:30:16 +0000
 categories: purescript warnings
 ---
 
-I recently added user defined warnings to the [PureScript][purescript]
+I recently added user defined warnings to the [PureScript][psc]
 compiler.  This feature will be available in the release following `0.10.5`.
 You can find the feature request [here][issue-warn].
 
@@ -47,11 +47,9 @@ fromList :: Warn "Deprecated `fromList`, use `fromFoldable` instead."
 fromFoldable :: forall f a. Foldable f => f a -> Foo a
 {% endhighlight %}
 
-I've written about this on the [documentation repo][docs].
+I've written about this on the [documentation repo][docs-warn].
 
 [psc]: https://github.com/purescript/purescript
-[docs-warn]: https://github.com/purescript/documentation/blob/master/guides/Custom-Type-Errors.md
 [issue-warn]: https://github.com/purescript/purescript/issues/2564
 [psc-symbols]: https://github.com/paf31/24-days-of-purescript-2016/blob/master/9.markdown
-[psc-fail]: https://github.com/paf31/24-days-of-purescript-2016/blob/master/21.markdown
-
+[docs-warn]: https://github.com/purescript/documentation/blob/master/guides/Custom-Type-Errors.md
