@@ -64,6 +64,7 @@ No type class instance was found for
 # Algorithm
 
 Implementing the `map` function is rather straight-forward.  For each argument in each constructor:
+
 * if the argument is the type index, then apply the mapping function
 * if the argument is a record, then recurse on each field
 * if the argument is a type application, recurse on the argument and wrap the function in a call to `map`
