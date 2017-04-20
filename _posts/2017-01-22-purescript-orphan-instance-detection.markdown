@@ -49,6 +49,7 @@ The covering sets are: `{ { l, r } }`
 This functional dependency is describing that we need to know both `l` and `r`to find an instance.  That is, `l` and `r` together determine `o`.
 
 This means that for an instance to not be an orphan, it must either:
+
 * be defined with the type class
 * or be defined in either the same module as `l`, or the same module as `r` - therefore the head types of `l` and `r` don't have to be defined in the same module
 
@@ -68,6 +69,7 @@ The covering sets here are: `{ { l }, { r } }`
 The arguments `l` and `r` both determine each other.  Thus for instance selection we either need to know a head type for `l` or a head type for `r`.
 
 This means that for an instance to not be an orphan, it must either:
+
 * be defined with the type class - there aren't restrictions on the modules of `l` and `r`
 * or be defined in the both the same module as `l` and the same module as `r` - therefore the head types of `l` and `r` must be defined in the same module
 
