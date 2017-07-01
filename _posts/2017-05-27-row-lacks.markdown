@@ -1,0 +1,82 @@
+---
+layout: post
+title:  "PureScript: RowLacks"
+date:   2017-05-27 23:09:30 +0000
+categories: purescript
+---
+
+This is a quick post about the new `RowLacks` type class that was added to [purescript-typelevel-prelude][tlprelude].  This can be used to require that a row does not contain a specific key.  The type class has the following signature:
+
+{% highlight haskell %}
+class RowLacks (key :: Symbol)
+               (row :: # Type)
+{% endhighlight %}
+
+There is a single instance defined for this type class.  Using `RowCons`, `Union`, and instance resolution in interesting ways such that an instance isn't found if `row` contains the label `key`.
+
+So the following will compile:
+
+{% highlight haskell %}
+eg0 :: Unit
+eg0 = unit :: RowLacks "foo" (bar :: Unit) => Unit
+{% endhighlight %}
+
+But this program fails because `row` contains a label `key`:
+
+{% highlight haskell %}
+eg1 :: Unit
+eg1 = unit :: RowLacks "foo" (foo :: Unit, bar :: Unit) => Unit
+
+-- compile error:
+--
+-- [1/1 NoInstanceFound]
+--
+--       eg1 = unit :: RowLacks "foo" (foo :: Unit, bar :: Unit) => Unit
+--             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+--
+--   No type class instance was found for
+--
+--     Type.Row.RowLacking Entry "foo" Unit (foo :: Unit, bar :: Unit)
+{% endhighlight %}
+
+## Implementation
+
+Here's the full implementation:
+
+{% highlight haskell %}
+module Type.Row
+  ( class RowLacks
+  , class RowLacking
+  ) where
+
+-- Must not be exported
+foreign import data Entry :: Type
+
+-- | If you get "No type class instance was found" for this class, then your
+-- | `row` shouldn't contain the label `key`.
+class RowLacking (entry :: Type)
+                 (key :: Symbol)
+                 (typ :: Type)
+                 (row :: # Type) |
+                 entry typ -> key row
+
+instance rowLacking :: RowLacking entry key entry row
+
+-- | Encodes the constraint that a given row does not contain a specific key.
+class RowLacks (key :: Symbol)
+               (row :: # Type)
+
+-- Append `Entry` at label `key` to the right of `row` then lookup `key` on the
+-- left - if we check via instance solving that the `typ` we get back is
+-- `Entry`, then `row` lacks `key`.  In the case that `row` doesn't lack
+-- `key`, we get a "No type class instance found" error for:
+-- `RowLacking Entry key typ row`.
+instance rowLacks
+  :: ( RowCons key Entry () keyEntry
+     , Union row keyEntry rowKeyEntry
+     , RowCons key typ ignored rowKeyEntry
+     , RowLacking Entry key typ row )
+  => RowLacks key row
+{% endhighlight %}
+
+[tlprelude]: https://github.com/purescript/purescript-typelevel-prelude
