@@ -20,7 +20,7 @@ foreign import data Cons :: Symbol -> Type -> RowList -> RowList
 This describes that entries in a `RowList` are pairs of symbols and types.
 
 The `RowToList` type class converts from a row of types to a `RowList`. It is
-solved by the compiler and is defined as:
+solved by the compiler (as of version 0.11.6) and is defined as:
 
 {% highlight haskell %}
 class RowToList (row :: # Type)
