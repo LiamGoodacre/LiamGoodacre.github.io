@@ -89,15 +89,13 @@ Now for the type class:
 class ApplyRecord (io :: # Type)
                   (i :: # Type)
                   (o :: # Type)
-                  | io -> i o
-                  , i -> io o
-                  , o -> io i
+                  | i o -> io
+                  , io o -> i
+                  , io i -> o
 {% endhighlight %}
 
-Notice all those functional dependencies.  To be able to compute the rough
-shape of any of these types we need to know the keys (the common part of all of
-them).  So I've constrained the type class such that I need only know one of
-the three types to be able to compute the rest.
+Notice all those functional dependencies.  To be able to compute the any of
+these types we need to know the other two.
 
 There's only one instance of the above type class, and it's a fairly
 straight-forward conversion of each of the rows to `RowList`, then delegate to
@@ -123,9 +121,9 @@ instead of working with rows of types, it works with `RowList`.
 class ApplyRowList (io :: RowList)
                    (i :: RowList)
                    (o :: RowList)
-                   | io -> i o
-                   , i -> io o
-                   , o -> io i
+                   | i o -> io
+                   , io o -> i
+                   , io i -> o
 {% endhighlight %}
 
 Almost exactly the same as the previous type class, just working at a different
@@ -171,19 +169,27 @@ bar = {a: true, b: 0}
 
 -- examples
 
--- infers: {a :: Boolean, b :: Int} -> {a :: String, b :: Boolean}
-eg0 :: _
 eg0 x = applyRecord foo x
-
--- infers: {a :: Boolean -> t0, b :: Int -> t1} -> {a :: t0, b :: t1}
-eg1 :: _
 eg1 x = applyRecord x bar
-
--- infers: { io :: {a :: t0 -> String, b :: t1 -> Boolean},
---           i  :: {a :: t0, b :: t1} | t2 }
-eg2 :: _ -> Record (a :: String, b :: Boolean)
 eg2 r = applyRecord r.io r.i
 {% endhighlight haskell %}
+
+{% highlight haskell %}
+-- With types equivalent to the following being inferred:
+
+eg0 :: forall i o.
+  ApplyRecord (a :: Boolean -> String, b :: Int -> Boolean) i o =>
+  Record i -> Record o
+
+eg1 :: forall io o.
+  ApplyRecord io (a :: Boolean, b :: Int) o =>
+  Record io -> Record o
+
+eg2 :: forall io i.
+  ApplyRecord io i (a :: String, b :: Boolean) =>
+  { io :: Record io, i :: Record i } ->
+  { a :: String, b :: Boolean }
+{% endhighlight %}
 
 ## Conclusion
 
@@ -192,5 +198,18 @@ Hopefully this has given you some insight into how the `RowToList` and
 example, we can now define `Show` and `Eq` instances for records!
 
 I look forward to seeing all the fun things people do with this :)
+
+## Update 2017-09-24
+
+In the previous version of this post I had the fundeps as:
+
+{% highlight haskell %}
+| io -> i o
+, i -> io o
+, o -> io i
+{% endhighlight %}
+
+This was incorrect, for example knowing just the input can't tell you the
+output.
 
 [typelevel-prelude]: https://github.com/purescript/purescript-typelevel-prelude
