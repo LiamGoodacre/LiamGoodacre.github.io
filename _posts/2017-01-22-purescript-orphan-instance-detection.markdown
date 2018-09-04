@@ -9,7 +9,7 @@ For the [0.10.4][psc-0-10-4] release, I worked on upgrading the existing orphan 
 
 # Setup/Definitions
 
-The head of a type is the top level constructor, for example the head of `Array Int` is `Array`.  In the context of an instance, all the heads of the arguments can be referred to as 'instance heads'.
+The root of a type is the top level constructor, for example the root of `Array Int` is `Array`..
 
 Functional dependencies are relationships between type class arguments which encode that some arguments can be determined by sets of other arguments.  See [here][psc-fun-deps] for more information.
 
@@ -18,7 +18,7 @@ A covering set is a minimal configuration of type class arguments which, via fun
 
 # Problem
 
-For a given constraint, when searching for type class instances, the PureScript compiler looks at the constraint's supplied arguments.  It finds which modules the head types are defined in and searches those, plus the type-class's module, for suitable instances.  The orphan instance check is about detecting if there are configurations of instance heads in covering sets, such that an instance would have been applicable, except for being defined in a module that we wouldn't know to look in.
+For a given constraint, when searching for type class instances, the PureScript compiler looks at the constraint's supplied arguments.  It finds which modules the root types are defined in and searches those, plus the type-class's module, for suitable instances.  The orphan instance check is about detecting if an instance is defined in a module that the compiler wouldn't know to look in.
 
 
 # Simple Example
@@ -31,7 +31,7 @@ class Newtype t a | t -> a
 
 The functional dependency describes that if argument `t` is known, then selecting an instance will determine `a`.  That is, we only need to know `t` for instance selection.
 
-As a consequence of this, it means we can only define an instance in either the same module as the type class, or the same module that the type supplied for `t` is defined in.  If the head of `a` is defined in a module that differs from `t` or the type class, then we can't define the instance there - because we don't necessarily know what `a` is when instance searching.
+As a consequence of this, it means we can only define an instance in either the same module as the type class, or the same module that the type supplied for `t` is defined in.  If the root of `a` is defined in a module that differs from `t` or the type class, then we can't define the instance there - because we don't necessarily know what `a` is when instance searching.
 
 The covering sets in this case are: `{ { t } }`
 
@@ -51,7 +51,7 @@ This functional dependency is describing that we need to know both `l` and `r`to
 This means that for an instance to not be an orphan, it must either:
 
 * be defined with the type class
-* or be defined in either the same module as `l`, or the same module as `r` - therefore the head types of `l` and `r` don't have to be defined in the same module
+* or be defined in either the same module as `l`, or the same module as `r` - therefore the root types of `l` and `r` don't have to be defined in the same module
 
 The set of modules we can look in is bigger because there are more arguments we need to know before instance selecting.
 
@@ -66,12 +66,12 @@ class Bar l r | l -> r, r -> l
 
 The covering sets here are: `{ { l }, { r } }`
 
-The arguments `l` and `r` both determine each other.  Thus for instance selection we either need to know a head type for `l` or a head type for `r`.
+The arguments `l` and `r` both determine each other.  Thus for instance selection we either need to know a root type for `l` or a root type for `r`.
 
 This means that for an instance to not be an orphan, it must either:
 
 * be defined with the type class - there aren't restrictions on the modules of `l` and `r`
-* or be defined in the both the same module as `l` and the same module as `r` - therefore the head types of `l` and `r` must be defined in the same module
+* or be defined in the both the same module as `l` and the same module as `r` - therefore the root types of `l` and `r` must be defined in the same module
 
 The set of modules we can look in is smaller because there are different sets of arguments we could use to find an instance.
 
