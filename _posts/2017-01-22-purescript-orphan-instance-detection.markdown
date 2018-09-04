@@ -9,7 +9,7 @@ For the [0.10.4][psc-0-10-4] release, I worked on upgrading the existing orphan 
 
 # Setup/Definitions
 
-The root of a type is the top level constructor, for example the root of `Array Int` is `Array`..
+The root of a type is the top level constructor, for example the root of `Array Int` is `Array`.
 
 Functional dependencies are relationships between type class arguments which encode that some arguments can be determined by sets of other arguments.  See [here][psc-fun-deps] for more information.
 
