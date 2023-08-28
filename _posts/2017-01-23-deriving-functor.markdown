@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: single
 title:  "PureScript: Deriving Functor"
 date:   2017-01-23 08:00:00 +0000
 categories: purescript functor deriving

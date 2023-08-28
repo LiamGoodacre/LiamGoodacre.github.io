@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: single
 title:  "PureScript: RowToList"
 date:   2017-07-10 20:52:31 +0000
 categories: purescript rows records

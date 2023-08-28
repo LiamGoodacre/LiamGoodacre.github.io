@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: single
 title:  "PureScript: Orphan Instance Detection"
 date:   2017-01-22 09:37:16 +0000
 categories: purescript type class instance orphan functional dependencies

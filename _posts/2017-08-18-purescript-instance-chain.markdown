@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: single
 title:  "PureScript: Instance chains and Overlapping Instances"
 date:   2017-08-18 00:00:00 +0000
 categories: purescript instance chain

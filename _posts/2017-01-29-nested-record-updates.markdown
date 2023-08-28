@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: single
 title:  "PureScript: Nested Record Updates"
 date:   2017-01-29 09:30:00 +0000
 categories: purescript records
