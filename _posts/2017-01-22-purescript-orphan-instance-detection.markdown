@@ -3,6 +3,7 @@ layout: single
 title:  "PureScript: Orphan Instance Detection"
 date:   2017-01-22 09:37:16 +0000
 categories: purescript type class instance orphan functional dependencies
+classes: wide
 ---
 
 For the [0.10.4][psc-0-10-4] release, I worked on upgrading the existing orphan check to take functional dependencies into account.  Before we get into what this means we will need some setup/definitions.

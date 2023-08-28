@@ -3,6 +3,7 @@ layout: single
 title:  "PureScript: RowLacks"
 date:   2017-05-27 23:09:30 +1000
 categories: purescript
+classes: wide
 ---
 
 This is a quick post about the new `RowLacks` type class that was added to [purescript-typelevel-prelude][tlprelude].  This can be used to require that a row does not contain a specific key.  The type class has the following signature:

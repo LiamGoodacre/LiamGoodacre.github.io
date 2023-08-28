@@ -3,6 +3,7 @@ layout: single
 title:  "PureScript: Instance chains and Overlapping Instances"
 date:   2017-08-18 00:00:00 +0000
 categories: purescript instance chain
+classes: wide
 ---
 
 In version `v0.12` the PureScript compiler has support instance chains, and

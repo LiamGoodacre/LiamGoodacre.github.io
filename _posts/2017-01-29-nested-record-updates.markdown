@@ -3,6 +3,7 @@ layout: single
 title:  "PureScript: Nested Record Updates"
 date:   2017-01-29 09:30:00 +0000
 categories: purescript records
+classes: wide
 ---
 
 When compiler version 0.10.6 is released, it will include a syntax for nested record updates.
