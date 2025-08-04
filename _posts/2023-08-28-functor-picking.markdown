@@ -5,8 +5,6 @@ date: 2023-08-28T13:22:16,798428869+01:00
 classes: wide
 ---
 
-(very early draft)
-
 ## Picking the Output
 
 Imagine you need to come up with a program of type:
