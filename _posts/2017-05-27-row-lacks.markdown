@@ -1,7 +1,7 @@
 ---
 layout: single
-title:  "PureScript: RowLacks"
-date:   2017-05-27 23:09:30 +1000
+title: "PureScript: RowLacks"
+date: 2017-05-27 23:09:30 +1000
 categories: purescript
 classes: wide
 ---

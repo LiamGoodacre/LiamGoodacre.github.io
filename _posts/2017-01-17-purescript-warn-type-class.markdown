@@ -1,7 +1,7 @@
 ---
 layout: single
-title:  "PureScript: Warn type class"
-date:   2017-01-17 21:30:16 +0000
+title: "PureScript: Warn type class"
+date: 2017-01-17 21:30:16 +0000
 categories: purescript warnings
 classes: wide
 ---
