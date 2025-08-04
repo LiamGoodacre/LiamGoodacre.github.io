@@ -5,8 +5,6 @@ date: 2025-08-03T20:30:00+00
 classes: wide
 ---
 
-## Super Class Family Pattern
-
 This will be reasonably brief, but I wanted to write out a somewhat compelling
 scenario to demonstrate the problem & solution.
 
