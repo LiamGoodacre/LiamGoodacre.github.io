@@ -1,8 +1,6 @@
 ---
-layout: single
 title: "Super Class Family Pattern"
 date: 2025-08-03T20:30:00+00
-classes: wide
 ---
 
 This will be reasonably brief, but I wanted to write out a somewhat compelling

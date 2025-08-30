@@ -1,9 +1,7 @@
 ---
-layout: single
 title: "PureScript: Warn type class"
 date: 2017-01-17 21:30:16 +0000
 categories: purescript warnings
-classes: wide
 ---
 
 I recently added user defined warnings to the [PureScript][psc]

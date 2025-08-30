@@ -1,8 +1,6 @@
 ---
-layout: single
 title: "Functor Picking"
 date: 2023-08-28T13:22:16,798428869+01:00
-classes: wide
 ---
 
 ## Picking the Output

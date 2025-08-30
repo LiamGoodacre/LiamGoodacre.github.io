@@ -1,9 +1,7 @@
 ---
-layout: single
 title: "PureScript: Deriving Functor"
 date: 2017-01-23 08:00:00 +0000
 categories: purescript functor deriving
-classes: wide
 ---
 
 For the [0.10.4][psc-0-10-4] release, I worked on `Functor` deriving.  This allows you to write a data type and derive a `Functor` instance for it.  This obviously doesn't work for all data types, but also doesn't necessarily work for all data types that could have a valid `Functor` instance written for them.  In this post I will demonstrate examples of the kinds of structures it works for, and those it doesn't.

@@ -1,9 +1,7 @@
 ---
-layout: single
 title: "PureScript: RowToList"
 date: 2017-07-10 20:52:31 +0000
 categories: purescript rows records
-classes: wide
 ---
 
 I recently added the `RowToList` and `ListToRow` type classes to the 2.3.0
