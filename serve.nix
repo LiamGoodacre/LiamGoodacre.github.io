@@ -3,17 +3,16 @@
 
 pkgs.mkShell {
   buildInputs = with pkgs; [
-    ruby
+    ruby_3_3
     bundler
-    jekyll
-    gem
   ];
 
   shellHook = "
     export LC_ALL=C.UTF-8
+    bundle config set --local path 'vendor/bundle'
     bundle install
     bundle lock --update
-    bundle exec jekyll serve -l --watch --incremental --port 8080
+    bundle exec jekyll serve -l --watch --incremental --port 8080 || true
     exit 0
   ";
 }
